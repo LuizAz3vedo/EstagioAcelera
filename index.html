@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Desafio de Estágio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="menu">
+        <img src="OIP-removebg-preview.png" alt="Ícone" class="icon">
+        <h3 class="name">Luiz Antônio</h3>
+        <p class="description">Para remover a tarefa basta clicar no botão e na tarefa.</p>
+        <ul class="links">
+          <li><a href="#">Link1</a></li>
+          <li><a href="#">Link2</a></li>
+          <li><a href="#">Link3</a></li>
+          <li><a href="#">Link4</a></li>
+        </ul>
+        <input type="text" id="task-input" placeholder="Digite o nome da tarefa">
+        <button onclick="addTask()" id="btn-add" class="button">Adicionar Tarefa</button>
+        <button onclick="removeTask()"  class="button">Remover Tarefa</button>
+        <button onclick="selectDayList()" id="btn-day" class="button">Lista do Dia</button>
+        <button onclick="selectNightList()" id="btn-night" class="button">Lista da Noite</button>
+    </div>         
+    <div class="content">
+        <div class="card">
+            <h1>Lista de tarefas</h1>
+        <table>
+          <tr>
+            <td>
+              <h2 class="centered" id="task-list-day-heading">Dia</h2>
+              <ol class="task-list selected" id="task-list-day">
+                <li>Tarefa 1</li>
+              </ol>
+            </td>
+            <td>
+              <h2 class="centered" id="task-list-night-heading">Noite</h2>
+              <ol class="task-list" id="task-list-night">
+                <li>Tarefa 1</li>
+              </ol>
+            </td>
+          </tr>
+        </table>
+        </div>
+    </div>
+
+    <script>
+      document.getElementById("btn-day").addEventListener("click", function() {
+          var dayList = document.getElementById("task-list-day");
+          var nightList = document.getElementById("task-list-night");
+    
+          dayList.classList.add("selected");
+          nightList.classList.remove("selected");
+      });
+    
+      document.getElementById("btn-night").addEventListener("click", function() {
+          var dayList = document.getElementById("task-list-day");
+          var nightList = document.getElementById("task-list-night");
+    
+          dayList.classList.remove("selected");
+          nightList.classList.add("selected");
+      });
+    
+      document.getElementById("btn-add").addEventListener("click", function() {
+    var taskInput = document.getElementById("task-input").value;
+    if (taskInput.trim() !== "") {
+        var taskList = document.querySelector(".task-list.selected");
+        var newTask = document.createElement("li");
+        newTask.innerText = taskInput;
+        newTask.addEventListener("click", removeTask);
+
+        taskList.appendChild(newTask);
+
+        document.getElementById("task-input").value = "";
+    }
+});
+
+
+    
+      function removeTask() {
+          var task = this;
+          task.parentNode.removeChild(task);
+      }
+  </script>
+</body>
+</html>
